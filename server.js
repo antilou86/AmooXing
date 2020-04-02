@@ -1,5 +1,7 @@
+require('dotenv').config()
 const express = require('express'); 
 const server = express(); 
+const port = process.env.PORT
 
 //GET request - explaination of request
 server.get('/hobbits', (req, res) => {
@@ -26,6 +28,6 @@ server.delete('/hobbits', (req, res) => {
     res.status(204);
   });
 
-server.listen(7777, () =>
-  console.log('Server running on http://localhost:7777')
+server.listen(port, () =>
+  console.log(`Server running on http://localhost:${port}`)
 );

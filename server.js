@@ -1,9 +1,39 @@
 require('dotenv').config()
-const express = require('express'); 
-const server = express(); 
-const port = process.env.PORT
 
-//GET request - explaination of request
+//setup
+const express = require('express'); 
+const server = express();
+const router = express.Router()
+const port = process.env.PORT || 7777
+
+//middleware for auth
+server.use(require("cors")());
+server.use(require("helmet")());
+server.use(express.json());
+
+//test endpoint
+server.get("/", (_, res) => {
+    res.status(200).json("Yup, it working..");
+  });
+
+//routers
+server.use(require("./endpoints/routers/users"));
+//server.use(require("./endpoints/routers/fruits"));
+//server.use(require("./endpoints/routers/pervious_versions"));
+//server.use(require("./endpoints/routers/images"));   <--for future use
+
+
+// Admin only routes
+const validate = require("./endpoints/middleware/validate");
+server.use(validate.token, validate.admin);
+server.use(require("./endpoints/routers/instructions"));
+server.use(require("./endpoints/routers/recipe_ingredients"));
+server.use(require("./endpoints/routers/ingredients"));
+server.use(require("./endpoints/routers/notes"));
+server.use(require("./endpoints/routers/units"));
+server.use(require("./endpoints/routers/tags"));
+
+//GET request
 server.get('/hobbits', (req, res) => {
     // query string parameters get added to req.query
     const sortField = req.query.sortby || 'id';
@@ -27,6 +57,11 @@ server.put('/hobbits', (req, res) => {
 server.delete('/hobbits', (req, res) => {
     res.status(204);
   });
+
+server.use((err, req, res, next) => {
+  console.log(err);
+  res.status(500).json(err);
+});
 
 server.listen(port, () =>
   console.log(`Server running on http://localhost:${port}`)

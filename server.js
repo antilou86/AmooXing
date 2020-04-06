@@ -26,12 +26,8 @@ server.use(require("./endpoints/routers/users"));
 // Admin only routes
 const validate = require("./endpoints/middleware/validate");
 server.use(validate.token, validate.admin);
-server.use(require("./endpoints/routers/instructions"));
-server.use(require("./endpoints/routers/recipe_ingredients"));
-server.use(require("./endpoints/routers/ingredients"));
-server.use(require("./endpoints/routers/notes"));
-server.use(require("./endpoints/routers/units"));
-server.use(require("./endpoints/routers/tags"));
+// server.use(require("./endpoints/routers/whatever_route"));
+
 
 //GET request
 server.get('/hobbits', (req, res) => {

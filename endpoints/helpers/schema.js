@@ -1,12 +1,11 @@
 const db = require("../../data/dbConfig");
 
-
-
 /**
  * Finds all fields that are required to be unique in a given table.
  *
  * @param {string}              table - Name of table you want a list of unique fields from.
  */
+
 const unique = async table =>
   await db
     .raw(
@@ -25,6 +24,7 @@ const unique = async table =>
  *
  * @param {string}              table - Name of table you want a list of required fields from.
  */
+
 const required = async table => {
   const schema = await db(table).columnInfo();
   let required = [];

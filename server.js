@@ -13,7 +13,7 @@ server.use(express.json());
 
 //test endpoint
 server.get("/", (req, res) => {
-    console.log("did this fire?")
+    console.log("SUCCESSFUL GET TO '/' ")
     res.status(200).json("Yup, it working..");
   });
 
@@ -59,5 +59,5 @@ server.use((err, req, res, next) => {
 });
 
 server.listen(port, () =>
-  console.log(`Server running on localhost:${port}`)
+  console.log(`Server running on port:${port}`)
 )

@@ -12,14 +12,14 @@ server.use(require("helmet")());
 server.use(express.json());
 
 //test endpoint
-server.get("/", (_, res) => {
+server.get("/", (req, res) => {
+    console.log("SUCCESSFUL GET TO '/' ")
     res.status(200).json("Yup, it working..");
+    
   });
 
 //routers
 server.use(require("./endpoints/routers/users"));
-//server.use(require("./endpoints/routers/fruits"));
-//server.use(require("./endpoints/routers/pervious_versions"));
 //server.use(require("./endpoints/routers/images"));   <--for future use
 
 
@@ -60,5 +60,5 @@ server.use((err, req, res, next) => {
 });
 
 server.listen(port, () =>
-  console.log(`Server running on http://localhost:${port}`)
-);
+  console.log(`Server running on port:${port}`)
+)

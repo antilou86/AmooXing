@@ -15,6 +15,7 @@ server.use(express.json());
 server.get("/", (req, res) => {
     console.log("SUCCESSFUL GET TO '/' ")
     res.status(200).json("Yup, it working..");
+    
   });
 
 //routers

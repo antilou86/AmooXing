@@ -8,7 +8,7 @@ module.exports = tbl => {
     tbl.text("availability");
     tbl.text("location");
     tbl.text("hemisphere");
+    tbl.text("sell_price");
     tbl.text("image_url");
-
   };
 

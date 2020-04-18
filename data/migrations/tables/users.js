@@ -7,5 +7,5 @@ module.exports = tbl => {
     tbl.text("password").notNullable();
     tbl.text("display_name");
     tbl.text("email");
-    //tbl.text("avatar_url");
+    tbl.text("avatar_url");  //TODO - generate random default avatar url on user generation
   };

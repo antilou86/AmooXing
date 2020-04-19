@@ -9,6 +9,6 @@ module.exports = tbl => {
     tbl.text("southern_season");
     tbl.text("southern_availability");
     tbl.text("location");
-    tbl.text("sell_price");
+    tbl.integer("sell_price");
     tbl.text("image_url");
   };

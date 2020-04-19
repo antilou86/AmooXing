@@ -4,8 +4,10 @@ module.exports = tbl => {
       .text("fish_name", 24)
       .unique()
       .notNullable();
-    tbl.text("season").notNullable();
-    tbl.text("availability");
+    tbl.text("northern_season");
+    tbl.text("northern_availability");
+    tbl.text("southern_season");
+    tbl.text("southern_availability");
     tbl.text("location");
     tbl.text("hemisphere");
     tbl.text("sell_price");

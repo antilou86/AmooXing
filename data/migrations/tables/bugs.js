@@ -1,7 +1,7 @@
 module.exports = tbl => {
     tbl.increments("id");
     tbl
-      .text("fish_name", 24)
+      .text("bug_name", 24)
       .unique()
       .notNullable();
     tbl.text("northern_season");
@@ -12,4 +12,3 @@ module.exports = tbl => {
     tbl.text("sell_price");
     tbl.text("image_url");
   };
-

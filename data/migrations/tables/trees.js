@@ -5,4 +5,5 @@ module.exports = tbl => {
       .unique()
       .notNullable();
     tbl.text("image_url");
+    tbl.text("non_native_selling_price");
   };

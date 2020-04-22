@@ -3,14 +3,14 @@ require("dotenv").config();
 
 module.exports = {
   development: {
-    client: "pg",
+    client: "postgresql",
     connection: {
       database: process.env.DB_NAME,
       user: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
     },
     migrations: {
-      directory: "./data/migrations",
+      directory: "./data/migrations/tablesknex",
     },
     seeds: {
       directory: "./data/seeds",

@@ -2,6 +2,9 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
+  "engines": {
+    "node": "12.14.x"
+  },
   "main": "index.js",
   "scripts": {
     "server": "nodemon index.js",

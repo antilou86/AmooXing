@@ -1,4 +1,6 @@
-module.exports = tbl => {
+
+exports.up = function(knex, promise) {
+  return knex.schema.createTable('bugs', tbl => {
     tbl.increments("id");
     tbl
       .text("bug_name", 24)
@@ -11,4 +13,9 @@ module.exports = tbl => {
     tbl.text("location");
     tbl.integer("sell_price");
     tbl.text("image_url");
-  };
+  });
+};
+
+exports.down = function(knex) {
+    return knex.schema.dropTableIfExists('bugs');
+};

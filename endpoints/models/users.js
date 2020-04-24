@@ -1,5 +1,5 @@
 
-const db = require("../../data/dbConfig");
+const db = require("../../data/dbconfig");
 
 add_one = async obj => {
   return await db.transaction(async trx => {

@@ -12,7 +12,7 @@ exports.up = function(knex) {
         tbl
           .integer("role_id")
           .references("id")
-          .inTable("roles")
+          .inTable("user_roles")
           .onUpdate("CASCADE")
           .onDelete("CASCADE")
           .notNullable();

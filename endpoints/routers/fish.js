@@ -1,24 +1,24 @@
 const router = require("express").Router();
-const model = require("../models/bugs");
+const model = require("../models/fish");
 const m = {
   //middleware
   encrypt: require("../middleware/encrypt"),
   validate: require("../middleware/validate"),
 };
 
-//add a bug
+//add a fish
 router.post(
-    `/bugs/add`, 
+    `/fish/add`, 
     m.validate.token, 
     m.validate.admin, 
     async (req, res) => {
       if (!req.body) {
         return res
         .status(400)
-        .json({message: "Please provide a bug details."});
+        .json({message: "Please provide fish details."});
     }
-    const new_bug = {
-        bug_name: req.body.bug_name,
+    const new_fish = {
+        fish_name: req.body.fish_name,
         northern_season: req.body.northern_season,
         northern_availability: req.body.northern_availability,
         southern_season: req.body.southern_season,
@@ -28,35 +28,35 @@ router.post(
         image_url: req.body.image_url
       };
     try {
-      const bug = await model.add_one(new_bug);
+      const fish = await model.add_one(new_fish);
       res.status(200).json({
-        message: `SUCCESS: BUG ADDED`,
-        user: bug,
+        message: `SUCCESS: FISH ADDED`,
+        user: fish,
       });
     } catch (err) {
       if (
         typeof err.detail === "string" &&
-        err.detail.match(/(\(bug\)).*(already exists)/i)
+        err.detail.match(/(\(fish\)).*(already exists)/i)
       ) {
-        return res.status(400).json({message: "That bug already exists."});
+        return res.status(400).json({message: "That fish already exists."});
       }
       console.log("err", err);
       res.status(500).json(err.detail);
     }
   });
   
-  //get one bug
+  //get one fish
   router.get(
-    `/bugs/:id`,
+    `/fish/:id`,
     m.validate.token,
     m.validate.admin,
     async (req, res) => {
       const {id} = req.params;
       try {
-        const bug = await model.get_by_id(id);
-        bug
-          ? res.status(200).json(bug)
-          : res.status(404).json("No bug found.");
+        const fish = await model.get_by_id(id);
+        fish
+          ? res.status(200).json(fish)
+          : res.status(404).json("No fish found.");
       } catch (err) {
         console.log(err);
         res.status(500).json(err.detail);
@@ -64,14 +64,14 @@ router.post(
     },
   );
 
-  //get all bugs
-  router.get(`/bugs`, m.validate.token, async (req, res) => {
-    console.log(req.bugs);
+  //get all fish
+  router.get(`/fish`, m.validate.token, async (req, res) => {
+    console.log(req.fish);
     try {
-      const bugs = await model.get_all();
-      bugs.length > 0
-        ? res.status(200).json(bugs)
-        : res.status(404).json("No bugs found.");
+      const fish = await model.get_all();
+      fish.length > 0
+        ? res.status(200).json(fish)
+        : res.status(404).json("No fish found.");
     } catch (err) {
       res.status(500).json(err.detail);
     }
@@ -79,50 +79,50 @@ router.post(
   
   //update a user
   router.put(
-    `/bugs/:id`,
+    `/fish/:id`,
     m.validate.token,
     m.validate.admin,
     async (req, res) => {
       const {id} = req.params;
       const updates = req.body;
       try {
-        const bug = await model.update_one(id, updates);
-        bug
-          ? res.status(200).json(bug)
-          : res.status(404).json(`Couldn't update bug`);
+        const fish = await model.update_one(id, updates);
+        fish
+          ? res.status(200).json(fish)
+          : res.status(404).json(`Couldn't update fish`);
       } catch (err) {
         res.status(500).json(err.detail);
       }
     },
   );
   
-  //terminate a bugs
+  //terminate a fish
   router.delete(
-    `/bugs/:id`,
+    `/fish/:id`,
     m.validate.token,
     m.validate.admin,
     async (req, res) => {
       const {id} = req.params;
       try {
-        const bug = await model.remove_one(id);
-        bug
-          ? res.status(200).json(`${bug.bug_name} has been terminated.`)
-          : res.status(404).json(`Couldn't find bug by ${id}.`);
+        const fish = await model.remove_one(id);
+        fish
+          ? res.status(200).json(`${fish.fish_name} has been terminated.`)
+          : res.status(404).json(`Couldn't find fish by ${id}.`);
       } catch (err) {
         res.status(500).json(err.detail);
       }
     },
   );
   
-  //terminate all bugs
+  //terminate all fish
   router.delete(
-    `/bugs`,
+    `/fish`,
     m.validate.token,
     m.validate.admin,
     async (req, res) => {
       try {
         await model.remove_all();
-        res.status(200).json("All bugs have been eliminated.");
+        res.status(200).json("All fish have been eliminated.");
       } catch (err) {
         res.status(500).json(err.detail);
       }

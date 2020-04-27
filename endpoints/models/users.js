@@ -1,4 +1,3 @@
-
 const db = require("../../data/dbconfig");
 
 add_one = async obj => {

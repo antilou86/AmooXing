@@ -15,7 +15,7 @@ router.post(
       if (!req.body) {
         return res
         .status(400)
-        .json({message: "Please provide a bug details."});
+        .json({message: "Please provide bug details."});
     }
     const new_bug = {
         bug_name: req.body.bug_name,

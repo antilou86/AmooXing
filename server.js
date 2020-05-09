@@ -14,7 +14,7 @@ server.use(express.json());
 //test endpoint
 server.get("/", (req, res) => {
     console.log("SUCCESSFUL GET TO '/' ")
-    res.status(200).json("Yup, it working..");
+    res.status(200).json("Yup, it's working..");
     
   });
 

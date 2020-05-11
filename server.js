@@ -18,20 +18,6 @@ server.get("/", (req, res) => {
     res.status(200).json("Yup, it's working..");    
   });
 
-//Get all bugs and fish
-const fish_module = require("./endpoints/models/fish")
-server.get("/sellables", async (req, res) => {
-    console.log("successful GET to /sellables")
-    try {
-        const ret_list = await fish_module.get_all_fish_and_bugs()
-        ret_list.length > 0 
-          ? res.status(200).json(ret_list)
-          : res.status(500).json({message: "Server error while collecting information. please contact administrator"})
-        } catch (err) {
-      throw err
-    }
-})
-
 //routers
 server.use(require("./endpoints/routers/users"));
 server.use(require("./endpoints/routers/fish"));
@@ -46,16 +32,19 @@ const validate = require("./endpoints/middleware/validate");
 server.use(validate.token, validate.admin);
 // server.use(require("./endpoints/routers/whatever_route"));
 
-
-//GET request
-server.get('/hobbits', (req, res) => {
-    // query string parameters get added to req.query
-    const sortField = req.query.sortby || 'id';
-    const hobbits = [ { id: 1, name: 'Samwise Gamgee', }, { id: 2, name: 'Frodo Baggins', },];
-    // apply the sorting
-    const response = hobbits.sort( (a, b) => (a[sortField] < b[sortField] ? -1 : 1) );
-    res.status(200).json(response);
-  });
+//Get all bugs and fish
+const fish_module = require("./endpoints/models/fish")
+server.get("/sellables", validate.token, async (req, res) => {
+    console.log("successful GET to /sellables")
+    try {
+        const ret_list = await fish_module.get_all_fish_and_bugs()
+        ret_list.length > 0 
+          ? res.status(200).json(ret_list)
+          : res.status(500).json({message: "Server error while collecting information. please contact administrator"})
+        } catch (err) {
+      throw err
+    }
+})
 
 //POST request - user creation and initial profile generation
 server.post('/hobbits', (req, res) => {

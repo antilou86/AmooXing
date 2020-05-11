@@ -39,7 +39,7 @@ get_one = async search_params =>
       .groupBy("bugs.id", "bugs.bug_name")
       .first();
 
-get_all = async (search_params = {}) => await db("bugs").where(search_params);
+get_all = async (search_params = {}) => await db("bugs").where(search_params).orderBy('sell_price', 'desc');
 
 update_one = async (id, obj) =>
   (

@@ -1,7 +1,6 @@
 const db = require("../../data/dbconfig");
 
 add_one = async obj => {
-  console.log("dropped into add_one in the user model")
   return await db.transaction(async trx => {
     try {
       const return_user = await trx("users")

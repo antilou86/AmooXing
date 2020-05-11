@@ -66,7 +66,6 @@ router.post(
 
   //get all bugs
   router.get(`/bugs`, m.validate.token, async (req, res) => {
-    console.log(req.bugs);
     try {
       const bugs = await model.get_all();
       bugs.length > 0

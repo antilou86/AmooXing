@@ -39,7 +39,7 @@ get_one = async search_params =>
       .groupBy("fish.id", "fish.fish_name")
       .first();
 
-get_all = async (search_params = {}) => await db("fish").where(search_params);
+get_all = async (search_params = {}) => await db("fish").where(search_params).orderBy('sell_price', 'desc');
 
 update_one = async (id, obj) =>
   (
@@ -59,6 +59,21 @@ remove_one = async id =>
 
 remove_all = async () => await db("fish").delete();
 
+get_all_fish_and_bugs = async () => await db("fish")
+  .select(
+    "fish.id",
+    "fish.fish_name as name",
+    "fish.northern_season",
+    "fish.northern_availability",
+    "fish.southern_season",
+    "fish.southern_availability",
+    "fish.location",
+    "fish.sell_price",
+    "fish.image_url",
+    )
+    .union(db.raw('SELECT id, bug_name as name, northern_season, northern_availability, southern_season, southern_availability, "location", sell_price, image_url FROM bugs'))
+    .orderBy("sell_price", "desc")
+
 module.exports = {
   add_one,
   get_one,
@@ -67,4 +82,5 @@ module.exports = {
   update_one,
   remove_one,
   remove_all,
+  get_all_fish_and_bugs,
 };

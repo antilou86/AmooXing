@@ -66,7 +66,6 @@ router.post(
 
   //get all fish
   router.get(`/fish`, m.validate.token, async (req, res) => {
-    console.log(req.fish);
     try {
       const fish = await model.get_all();
       fish.length > 0
@@ -77,7 +76,7 @@ router.post(
     }
   });
   
-  //update a user
+  //update a fish
   router.put(
     `/fish/:id`,
     m.validate.token,

@@ -43,7 +43,6 @@ router.post(`/users/register`, async (req, res) => {
     m.validate.user,
     async (req, res) => {
       try {
-        console.log(req)
         if (req.token) {
           const time = Date.now()
           const login_time = {last_login: time}
@@ -81,9 +80,7 @@ router.post(`/users/register`, async (req, res) => {
   );
   
   //get all users
-  router.get(`/users`, async (req, res) => {
-    console.log(req.user);
-  
+  router.get(`/users`, async (req, res) => {  
     try {
       const users = await model.get_all();
       users.length > 0

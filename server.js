@@ -6,6 +6,7 @@ const server = express();
 const router = express.Router()
 const port = process.env.PORT || 7777
 
+
 //middleware for auth
 server.use(require("cors")());
 server.use(require("helmet")());
@@ -14,14 +15,31 @@ server.use(express.json());
 //test endpoint
 server.get("/", (req, res) => {
     console.log("SUCCESSFUL GET TO '/' ")
-    res.status(200).json("Yup, it's working..");
-    
+    res.status(200).json("Yup, it's working..");    
   });
+
+//Get all bugs and fish
+const fish_module = require("./endpoints/models/fish")
+server.get("/sellables", async (req, res) => {
+    console.log("successful GET to /sellables")
+    try {
+        const ret_list = await fish_module.get_all_fish_and_bugs()
+        ret_list.length > 0 
+          ? res.status(200).json(ret_list)
+          : res.status(500).json({message: "Server error while collecting information. please contact administrator"})
+        } catch (err) {
+      throw err
+    }
+})
 
 //routers
 server.use(require("./endpoints/routers/users"));
-//server.use(require("./endpoints/routers/images"));   <--for future use
-
+server.use(require("./endpoints/routers/fish"));
+server.use(require("./endpoints/routers/bugs"));
+// server.use(require("./endpoints/routers/diys"));
+// server.use(require("./endpoints/routers/flowers"));
+// server.use(require("./endpoints/routers/materials"));
+// server.use(require("./endpoints/routers/villagers"));
 
 // Admin only routes
 const validate = require("./endpoints/middleware/validate");

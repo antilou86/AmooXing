@@ -66,7 +66,6 @@ router.post(
   router.get(
     `/users/:id`,
     m.validate.token,
-    m.validate.admin,
     async (req, res) => {
       const {id} = req.params;
       try {
@@ -102,8 +101,10 @@ router.post(
     async (req, res) => {
       const {id} = req.params;
       const updates = req.body;
+      console.log("updating with params: ", updates)
       try {
         const user = await model.update_one(id, updates);
+        console.log("passed validation", user)
         user
           ? res.status(200).json(user)
           : res.status(404).json(`Couldn't update user`);

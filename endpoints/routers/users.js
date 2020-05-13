@@ -38,23 +38,26 @@ router.post(`/users/register`, async (req, res) => {
   });
   
   //login a user
-  router.post(`/users/login`, m.validate.user, async (req, res) => {
-    try {
-      if (req.user) {
-        const user = req.user;
-        const token = req.token;
-        res.status(200).json({
-          message: `Great job remembering your password.`,
-          user: {id: user.id, username: user.username},
-          token,
-        });
-      } else
-        res.status(400).json({
-          message: `Incorrect password or username.`,
-        });
-    } catch (err) {
-      res.status(500).json(err.detail);
-    }
+  router.post(
+    `/users/login`,
+    m.validate.user,
+    async (req, res) => {
+      try {
+        if (req.token) {
+          const time = Date.now()
+          const login_time = {last_login: time}
+          await model.update_one(req.user.id, login_time)
+          res.status(200).json({
+            message: `Great job remembering your password.`,
+            user: req.user,
+            token: req.token,
+          });
+        } else {
+          res.status(400).json({message: `Incorrect password or username.`});
+        }
+      } catch (err) {
+        res.status(500).json(err.detail);
+      }
   });
   
   //get one user
@@ -77,9 +80,7 @@ router.post(`/users/register`, async (req, res) => {
   );
   
   //get all users
-  router.get(`/users`, m.validate.token, m.validate.admin, async (req, res) => {
-    console.log(req.user);
-  
+  router.get(`/users`, async (req, res) => {  
     try {
       const users = await model.get_all();
       users.length > 0

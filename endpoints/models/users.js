@@ -1,4 +1,3 @@
-
 const db = require("../../data/dbconfig");
 
 add_one = async obj => {
@@ -12,6 +11,7 @@ add_one = async obj => {
         role_id: 1,
       };
       await trx("user_roles").insert(user_roles_entry);
+      console.log("new user added")
       return return_user[0];
     } catch (err) {
       throw err;
@@ -33,19 +33,7 @@ get_by_id = id =>
     .groupBy("users.id", "users.username", "users.password")
     .first();
 
-get_one = async search_params =>
-  await db("users")
-    .where(search_params)
-    .join("user_roles as ur", "users.id", "=", "ur.user_id")
-    .join("roles", "ur.role_id", "=", "roles.id")
-    .select(
-      "users.id",
-      "users.username",
-      "users.password",
-      db.raw(`json_agg(roles.name) as roles`),
-    )
-    .groupBy("users.id", "users.username", "users.password")
-    .first();
+get_one = async search_params => await db("users").where(search_params).first();
 
 get_all = async (search_params = {}) => await db("users").where(search_params);
 

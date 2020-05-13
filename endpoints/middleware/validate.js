@@ -40,17 +40,19 @@ const generate_token = user => {
  * @param {Object}              req - Express Request object.
  * @param {Object}              req.body - Body of data from web request.
  * @param {string}              req.body.username - Username from web request.
- * @param {string}              req.body.username - Password from web request.
+ * @param {string}              req.body.password - Password from web request.
  * @param {Object<string, any>} res - Express Response object.
  * @param {Function}            next - Express Next function.
  */
+const user_model = require('../models/users')
 const user = async (req, res, next) => {
   const {username, password} = req.body;
   //get user from database
-  const user = await user_model.get_one({username});
+  const user = await user_model.get_one({username: username});
   if (user && crypt.compareSync(password, user.password)) {
     //remove password from response
     delete user.password;
+    delete req.body.password;
     //store user and token in the request
     req.user = user;
     req.token = generate_token(user);

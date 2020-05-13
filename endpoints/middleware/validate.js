@@ -92,7 +92,7 @@ const token = async (req, res, next) => {
         }
       })
     : //send error if no token is provided
-      res.status(404).json({message: `What's the password?`});
+      res.status(404).json({message: `non-existant token cannot be validated`});
 };
 
 /**
@@ -107,6 +107,7 @@ const token = async (req, res, next) => {
  * @param {Object<string, any>}    res - Express Response object.
  * @param {Function}               next - Express Next function.
  */
+
 const admin = (req, res, next) => {
   if (!req.user.roles.includes("admin")) {
     res

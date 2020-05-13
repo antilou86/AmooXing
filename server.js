@@ -27,14 +27,10 @@ server.use(require("./endpoints/routers/bugs"));
 // server.use(require("./endpoints/routers/materials"));
 // server.use(require("./endpoints/routers/villagers"));
 
-// Admin only routes
-const validate = require("./endpoints/middleware/validate");
-server.use(validate.token, validate.admin);
-// server.use(require("./endpoints/routers/whatever_route"));
-
 //Get all bugs and fish
 const fish_module = require("./endpoints/models/fish")
-server.get("/sellables", validate.token, async (req, res) => {
+const validate_token = require("./endpoints/middleware/validate").token;
+server.get("/sellables", validate_token, async (req, res) => {
     console.log("successful GET to /sellables")
     try {
         const ret_list = await fish_module.get_all_fish_and_bugs()
@@ -45,6 +41,11 @@ server.get("/sellables", validate.token, async (req, res) => {
       throw err
     }
 })
+
+// Admin only routes
+const validate = require("./endpoints/middleware/validate");
+server.use(validate.token, validate.admin);
+// server.use(require("./endpoints/routers/whatever_route"));
 
 //POST request - user creation and initial profile generation
 server.post('/hobbits', (req, res) => {

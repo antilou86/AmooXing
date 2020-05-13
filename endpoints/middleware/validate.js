@@ -40,7 +40,7 @@ const generate_token = user => {
  * @param {Object}              req - Express Request object.
  * @param {Object}              req.body - Body of data from web request.
  * @param {string}              req.body.username - Username from web request.
- * @param {string}              req.body.username - Password from web request.
+ * @param {string}              req.body.password - Password from web request.
  * @param {Object<string, any>} res - Express Response object.
  * @param {Function}            next - Express Next function.
  */

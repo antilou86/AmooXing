@@ -7,7 +7,9 @@ const m = {
 };
 
 //add a user
-router.post(`/users/register`, async (req, res) => {
+router.post(
+  `/users/register`, 
+  async (req, res) => {
     if (!req.body || !req.body.username.length || !req.body.password.length) {
       return res
         .status(400)
@@ -80,7 +82,9 @@ router.post(`/users/register`, async (req, res) => {
   );
   
   //get all users
-  router.get(`/users`, async (req, res) => {  
+  router.get(`/users`,
+    m.validate.token,
+    m.validate.admin, async (req, res) => {  
     try {
       const users = await model.get_all();
       users.length > 0
@@ -95,7 +99,6 @@ router.post(`/users/register`, async (req, res) => {
   router.put(
     `/users/:id`,
     m.validate.token,
-    m.validate.admin,
     async (req, res) => {
       const {id} = req.params;
       const updates = req.body;

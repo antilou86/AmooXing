@@ -4,10 +4,9 @@ const express = require('express');
 const cors = require('cors')
 const server = express();
 
-const hostname = '127.0.0.1'; // the local computer where the server is running
-const port = process.env.PORT || 7777; // a port we'll use to watch for traffic
+const hostname = process.env.DB_HOST || '127.0.0.1';
+const port = process.env.PORT || 7777; 
 
-server.use(cors())
 
 server.get('/', (req,res) => {
     console.log("200: GET request to /")

@@ -18,11 +18,11 @@ module.exports = {
   },
   production: {
     client: "pg",
-    connection: {
-            host: process.env.HEROKU_HOST,
-            database: process.env.HEROKU_DB_NAME,
-            user: process.env.HEROKU_USER,
-            password: process.env.HEROKU_PASSWORD,
+    connection: process.env.DB_URL || {
+            host: process.env.DB_HOST,
+            database: process.env.DB_NAME,
+            user: process.env.DB_USER,
+            password: process.env.DB_PASSWORD,
           },
     migrations: {
       directory: "./data/migrations/tables",

@@ -4,7 +4,7 @@ const express = require('express');
 const cors = require('cors')
 const server = express();
 
-const hostname = process.env.DB_HOST || '127.0.0.1+';
+const hostname = process.env.DB_HOST || '127.0.0.1';
 const port = process.env.PORT || 7777; 
 
 

@@ -19,9 +19,9 @@ module.exports = {
   production: {
     client: "pg",
     connection: process.env.HEROKU_URL || {
-            database: process.env.DATABASE_NAME,
-            user: process.env.DATABASE_USER,
-            password: process.env.DATABASE_PASSWORD,
+            database: process.env.HEROKU_DB_NAME,
+            user: process.env.HEROKU_USER,
+            password: process.env.HEROKU_PASSWORD,
           },
     migrations: {
       directory: "./data/migrations/tables",

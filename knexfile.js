@@ -18,7 +18,7 @@ module.exports = {
   },
   production: {
     client: "postgresql",
-    connection: process.env.DB_URL || {
+    connection: process.env.HEROKU_URL || {
             database: process.env.DATABASE_NAME,
             user: process.env.DATABASE_USER,
             password: process.env.DATABASE_PASSWORD,

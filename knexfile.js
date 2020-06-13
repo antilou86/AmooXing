@@ -19,6 +19,7 @@ module.exports = {
   production: {
     client: "pg",
     connection: {
+            host: process.env.HEROKU_HOST,
             database: process.env.HEROKU_DB_NAME,
             user: process.env.HEROKU_USER,
             password: process.env.HEROKU_PASSWORD,

@@ -51,8 +51,8 @@ server.use(require("./endpoints/routers/bugs"));
 
 //Get all bugs and fish
 const fish_module = require("./endpoints/models/fish")
-const validate_token = require("./endpoints/middleware/validate").token;
-server.get("/sellables", validate_token, async (req, res) => {
+// const validate_token = require("./endpoints/middleware/validate").token;
+server.get("/sellables", async (req, res) => {
     console.log("successful GET to /sellables")
     try {
         const ret_list = await fish_module.get_all_fish_and_bugs()

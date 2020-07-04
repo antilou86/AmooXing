@@ -71,9 +71,10 @@ get_all_fish_sea_critters_and_bugs = async () => await db("sea_critter")
     "sea_critter.sell_price",
     "sea_critter.image_url",
     )
-    .union(db.raw('SELECT id, bug_name as name, northern_season, northern_availability, southern_season, southern_availability, "location", sell_price, image_url FROM bugs'))
-    .union(db.raw('SELECT id, fish_name as name, northern_season, northern_availability, southern_season, southern_availability, "location", sell_price, image_url FROM fish'))
-    .orderBy("sell_price", "desc")
+  .union(db.raw('SELECT id, bug_name as name, northern_season, northern_availability, southern_season, southern_availability, "location", sell_price, image_url FROM bugs'),
+           db.raw('SELECT id, fish_name as name, northern_season, northern_availability, southern_season, southern_availability, "location", sell_price, image_url FROM fish')
+    )
+  .orderBy("sell_price", "desc")
 
 module.exports = {
   add_one,
@@ -83,5 +84,5 @@ module.exports = {
   update_one,
   remove_one,
   remove_all,
-  get_all_sea_critter_and_bugs,
+  get_all_fish_sea_critters_and_bugs,
 };

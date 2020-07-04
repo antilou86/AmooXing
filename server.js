@@ -50,12 +50,12 @@ server.use(require("./endpoints/routers/bugs"));
 // server.use(require("./endpoints/routers/villagers"));
 
 //Get all bugs and fish
-const fish_module = require("./endpoints/models/fish")
+const sellables_module = require("./endpoints/models/sea_critters")
 // const validate_token = require("./endpoints/middleware/validate").token;
 server.get("/sellables", async (req, res) => {
     console.log("successful GET to /sellables")
     try {
-        const ret_list = await fish_module.get_all_fish_and_bugs()
+        const ret_list = await sellables_module.get_all_fish_sea_critters_and_bugs()
         ret_list.length > 0 
           ? res.status(200).json(ret_list)
           : res.status(500).json({message: "Server error while collecting information. please contact administrator"})

@@ -30,11 +30,11 @@ returns an array of json objects shaped like so:
 ```javascript
 [
   {
-  "id": 1, //integer
-  "villager_name":"Shrunk", //string
-  "birthday":"1/2", //string
-  "personality": "unspecified",  //string
-  "image_url": "https://gamewith-en.akamaized.net/article_tools/animal-crossing-new-horizons/gacha/c1_i.png", //string
+    "id": 1, //integer
+    "villager_name":"Shrunk", //string
+    "birthday":"1/2", //string
+    "personality": "unspecified",  //string
+    "image_url": "https://gamewith-en.akamaized.net/article_tools/animal-crossing-new-horizons/gacha/c1_i.png", //string
   }, 
 ]
 ```

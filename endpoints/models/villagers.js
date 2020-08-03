@@ -35,7 +35,9 @@ get_one = async search_params =>
       .groupBy("villagers.id", "villagers.villager_name")
       .first();
 
-get_all = async (search_params = {}) => await db("villagers").where(search_params)
+get_all = async (search_params = {}) => 
+    await db("villagers")
+      .where(search_params)
 
 update_one = async (id, obj) =>
   (

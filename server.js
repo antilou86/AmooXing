@@ -44,14 +44,13 @@ server.get('/db', async (req, res) => {
 server.use(require("./endpoints/routers/users"));
 server.use(require("./endpoints/routers/fish"));
 server.use(require("./endpoints/routers/bugs"));
+server.use(require("./endpoints/routers/villagers"));
 // server.use(require("./endpoints/routers/diys"));
 // server.use(require("./endpoints/routers/flowers"));
 // server.use(require("./endpoints/routers/materials"));
-// server.use(require("./endpoints/routers/villagers"));
 
 //Get all bugs and fish
 const sellables_module = require("./endpoints/models/sea_critters")
-// const validate_token = require("./endpoints/middleware/validate").token;
 server.get("/sellables", async (req, res) => {
     try {
         const ret_list = await sellables_module.get_all_fish_sea_critters_and_bugs()
@@ -63,17 +62,17 @@ server.get("/sellables", async (req, res) => {
     }
 })
 
-const villagers_module = require("./endpoints/models/villagers")
-server.get("/villagers", async (req, res) => {
-  try {
-      const ret_list = await villagers_module.get_all_villagers()
-      ret_list.length > 0 
-        ? res.status(200).json(ret_list)
-        : res.status(500).json({message: "Server error while collecting information. please contact administrator"})
-      } catch (err) {
-    throw err
-  }
-})
+// const villagers_module = require("./endpoints/models/villagers")
+// server.get("/villagers", async (req, res) => {
+//   try {
+//       const ret_list = await villagers_module.get_all()
+//       ret_list.length > 0 
+//         ? res.status(200).json(ret_list)
+//         : res.status(500).json({message: "Server error while collecting information. please contact administrator"})
+//       } catch (err) {
+//     throw err
+//   }
+// })
 // Admin only routes
 const validate = require("./endpoints/middleware/validate");
 server.use(validate.token, validate.admin);

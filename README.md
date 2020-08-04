@@ -1,6 +1,5 @@
 # AmooXing
-a way for friends to stay connected and informed about the current state of each others animal crossing islands
-
+Back end for [AmooXing]("https://master.d3u1c7xm8qrvaq.amplifyapp.com/") a companion app for Animal Crossing New Horizons
 ## Endpoints 
 
 #### /sellables

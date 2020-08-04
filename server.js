@@ -62,17 +62,6 @@ server.get("/sellables", async (req, res) => {
     }
 })
 
-// const villagers_module = require("./endpoints/models/villagers")
-// server.get("/villagers", async (req, res) => {
-//   try {
-//       const ret_list = await villagers_module.get_all()
-//       ret_list.length > 0 
-//         ? res.status(200).json(ret_list)
-//         : res.status(500).json({message: "Server error while collecting information. please contact administrator"})
-//       } catch (err) {
-//     throw err
-//   }
-// })
 // Admin only routes
 const validate = require("./endpoints/middleware/validate");
 server.use(validate.token, validate.admin);

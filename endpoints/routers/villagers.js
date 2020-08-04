@@ -61,16 +61,17 @@ router.post(
   );
 
   //get all villagers
-  router.get(`/villagers`,  async (req, res) => {
+  const villagers_module = require("./endpoints/models/villagers")
+  router.get("/villagers", async (req, res) => {
     try {
-      const villagers = await model.get_all();
-      villagers.length > 0
-        ? res.status(200).json(villagers)
-        : res.status(404).json("No villagers found.");
-    } catch (err) {
-      res.status(500).json(err.detail);
+        const ret_list = await villagers_module.get_all()
+        ret_list.length > 0 
+          ? res.status(200).json(ret_list)
+          : res.status(500).json({message: "Server error while collecting information. please contact administrator"})
+        } catch (err) {
+      throw err
     }
-  });
+  })
   
   //update a villager
   router.put(

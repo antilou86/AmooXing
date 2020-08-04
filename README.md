@@ -3,9 +3,9 @@ a way for friends to stay connected and informed about the current state of each
 
 ## Endpoints 
 
-#### Sellable items
+#### /sellables
 ##### GET
-/sellables <br/>
+
 returns an array of json objects shaped like so: 
 ```javascript
 [
@@ -23,9 +23,9 @@ returns an array of json objects shaped like so:
 ]
 ```
 
-#### Villagers
+#### /villagers
 ##### GET
-/villagers <br/>
+
 returns an array of json objects shaped like so: 
 ```javascript
 [
